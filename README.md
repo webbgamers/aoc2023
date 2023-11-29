@@ -1,6 +1,6 @@
-# Advent of Code 2022
+# Advent of Code 2023
 Here we go again...
-This is my testing system and (eventually) solutions for [AOC 2022](https://adventofcode.com/2022). In an attempt to get better at Rust (I'm a little rusty 😉) I am doing this all in Rust.
+This is my testing system and (eventually) solutions for [AOC 2023](https://adventofcode.com/2023). Doing everything in Rust for a 3rd year in a row because why not?
 
 ## How to see my solutions
 `cargo run [day]` (If no day is provided during competition time, the current date is used)
@@ -16,4 +16,4 @@ If no input is found in input/day##.txt, the input for the selected day will be 
  - Will to live (optional)
 
 ## Coming Soon
-Automatic answer submittal right from the CLI!
+Automatic answer submittal right from the CLI! (didn't happen last year so we'll see)
