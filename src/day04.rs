@@ -1,6 +1,5 @@
 use regex::Regex;
 use std::collections::HashMap;
-use std::collections::VecDeque;
 use std::fmt::Display;
 
 pub fn solve(input: String) -> (String, String) {
