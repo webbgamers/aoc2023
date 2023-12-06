@@ -35,21 +35,39 @@ mod day06;
 //mod day25;
 
 fn main() {
-    let day = match env::args().nth(1) {
-        Some(day) => match day.parse::<u32>() {
-            Ok(day) => day,
-            Err(_) => {
-                println!("Enter a vaild day.");
-                return;
-            }
-        },
-        None => {
+    let (day, extras) = match {
+        match env::args().nth(1).as_deref() {
+            Some("extra") => {
+                match env::args().nth(2) {
+                    Some(day) => {
+                        (Some(day), true)
+                    },
+                    None => {
+                        (None, true)
+                    }
+                }
+            },
+            Some(day) => (Some(day.to_owned()), false),
+            None => (None, false),
+        }
+    } {
+        (None, extras) => {
             let time = Utc::now().with_timezone(&EST);
             if time.month() == 12 && time.day() <= 25 {
-                time.day()
+                (time.day(), extras)
             } else {
                 println!("You must specify a day.");
                 return;
+            }
+        },
+        
+        (Some(day), extras) => {
+            match day.parse::<u32>() {
+                Ok(day) => (day, extras),
+                Err(_) => {
+                    println!("Enter a vaild day.");
+                    return;
+                }
             }
         }
     };
@@ -67,43 +85,51 @@ fn main() {
         }
     };
 
-    // Add each day to match statement here
-    let (p1, p2) = match day {
-        1 => day01::solve(input),
-        2 => day02::solve(input),
-        3 => day03::solve(input),
-        4 => day04::solve(input),
-        5 => day05::solve(input),
-        6 => day06::solve(input),
-        //7 => day07::solve(input),
-        //8 => day08::solve(input),
-        //9 => day09::solve(input),
-        //10 => day10::solve(input),
-        //11 => day11::solve(input),
-        //12 => day12::solve(input),
-        //13 => day13::solve(input),
-        //14 => day14::solve(input),
-        //15 => day15::solve(input),
-        //16 => day16::solve(input),
-        //17 => day17::solve(input),
-        //18 => day18::solve(input),
-        //19 => day19::solve(input),
-        //20 => day20::solve(input),
-        //21 => day21::solve(input),
-        //22 => day22::solve(input),
-        //23 => day23::solve(input),
-        //24 => day24::solve(input),
-        //25 => day25::solve(input),
-        _ => (
-            String::from("Not implemented yet"),
-            String::from("Not implemented yet"),
-        ),
-    };
+    // Extra fun stuff 
+    if extras {
+        match day {
+            //5 => day05::extra(input),
+            _ => println!("\nNo extras for day {day}.\n"),
+        }
+    } else {
+        // Add each day to match statement here
+        let (p1, p2) = match day {
+            1 => day01::solve(input),
+            2 => day02::solve(input),
+            3 => day03::solve(input),
+            4 => day04::solve(input),
+            5 => day05::solve(input),
+            6 => day06::solve(input),
+            //7 => day07::solve(input),
+            //8 => day08::solve(input),
+            //9 => day09::solve(input),
+            //10 => day10::solve(input),
+            //11 => day11::solve(input),
+            //12 => day12::solve(input),
+            //13 => day13::solve(input),
+            //14 => day14::solve(input),
+            //15 => day15::solve(input),
+            //16 => day16::solve(input),
+            //17 => day17::solve(input),
+            //18 => day18::solve(input),
+            //19 => day19::solve(input),
+            //20 => day20::solve(input),
+            //21 => day21::solve(input),
+            //22 => day22::solve(input),
+            //23 => day23::solve(input),
+            //24 => day24::solve(input),
+            //25 => day25::solve(input),
+            _ => (
+                String::from("Not implemented yet"),
+                String::from("Not implemented yet"),
+            ),
+        };
+        println!("\nDay {} Part 1:", day);
+        println!("{}\n", p1);
+        println!("Day {} Part 2:", day);
+        println!("{}\n", p2);
+    }
 
-    println!("\nDay {} Part 1:", day);
-    println!("{}\n", p1);
-    println!("Day {} Part 2:", day);
-    println!("{}\n", p2);
 }
 
 pub fn get_input(day: &u32) -> Option<String> {
