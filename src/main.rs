@@ -14,7 +14,7 @@ mod day03;
 mod day04;
 mod day05;
 mod day06;
-//mod day07;
+mod day07;
 //mod day08;
 //mod day09;
 //mod day10;
@@ -37,15 +37,9 @@ mod day06;
 fn main() {
     let (day, extras) = match {
         match env::args().nth(1).as_deref() {
-            Some("extra") => {
-                match env::args().nth(2) {
-                    Some(day) => {
-                        (Some(day), true)
-                    },
-                    None => {
-                        (None, true)
-                    }
-                }
+            Some("extra") => match env::args().nth(2) {
+                Some(day) => (Some(day), true),
+                None => (None, true),
             },
             Some(day) => (Some(day.to_owned()), false),
             None => (None, false),
@@ -59,17 +53,15 @@ fn main() {
                 println!("You must specify a day.");
                 return;
             }
-        },
-        
-        (Some(day), extras) => {
-            match day.parse::<u32>() {
-                Ok(day) => (day, extras),
-                Err(_) => {
-                    println!("Enter a vaild day.");
-                    return;
-                }
-            }
         }
+
+        (Some(day), extras) => match day.parse::<u32>() {
+            Ok(day) => (day, extras),
+            Err(_) => {
+                println!("Enter a vaild day.");
+                return;
+            }
+        },
     };
 
     if day > 25 {
@@ -85,7 +77,7 @@ fn main() {
         }
     };
 
-    // Extra fun stuff 
+    // Extra fun stuff
     if extras {
         match day {
             //5 => day05::extra(input),
@@ -100,7 +92,7 @@ fn main() {
             4 => day04::solve(input),
             5 => day05::solve(input),
             6 => day06::solve(input),
-            //7 => day07::solve(input),
+            7 => day07::solve(input),
             //8 => day08::solve(input),
             //9 => day09::solve(input),
             //10 => day10::solve(input),
@@ -129,7 +121,6 @@ fn main() {
         println!("Day {} Part 2:", day);
         println!("{}\n", p2);
     }
-
 }
 
 pub fn get_input(day: &u32) -> Option<String> {
