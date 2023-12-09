@@ -41,7 +41,7 @@ fn part2(input: &str) -> impl Display {
             .parse::<u64>()
             .unwrap()
     });
-	
+
     let time = input.next().unwrap();
     let dist = input.next().unwrap();
 
