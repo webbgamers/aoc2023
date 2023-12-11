@@ -39,7 +39,7 @@ fn part1(input: &str) -> impl Display {
                     }
                 }
                 order
-            },
+            }
             order => order,
         }
     });
@@ -85,7 +85,7 @@ fn part2(input: &str) -> impl Display {
                     }
                 }
                 order
-            },
+            }
             order => order,
         }
     });
