@@ -18,7 +18,6 @@ fn part1(input: &str) -> impl Display {
     let mut total = 0;
 
     'outer: for (width, height, pattern) in patterns {
-        println!("\nPATTERN");
         // Horizontal mirroring
         for mirror_x in 1..width {
             let check_size = (width - mirror_x).min(mirror_x);
@@ -33,9 +32,6 @@ fn part1(input: &str) -> impl Display {
                     right_columns.push(pattern[coords_to_index(right_x, y, width)]);
                 }
             }
-
-            println!("L: {left_columns:?}");
-            println!("R: {right_columns:?}");
 
             if left_columns == right_columns {
                 total += mirror_x;
