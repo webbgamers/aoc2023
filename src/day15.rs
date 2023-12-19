@@ -23,8 +23,8 @@ fn part2(input: &str) -> impl Display {
         .unwrap()
         .split(',')
         .map(|seq| {
-            if seq.ends_with('-') {
-                (&seq[..seq.len() - 1], None)
+            if let Some(stripped) = seq.strip_suffix('-') {
+                (stripped, None)
             } else {
                 let mut seq = seq.split('=');
                 (
@@ -46,10 +46,8 @@ fn part2(input: &str) -> impl Display {
             } else {
                 lens_box.push((label, focal_length));
             }
-        } else {
-            if let Some(lens_index) = lens_box.iter().position(|&(l, _)| l == label) {
-                lens_box.remove(lens_index);
-            }
+        } else if let Some(lens_index) = lens_box.iter().position(|&(l, _)| l == label) {
+            lens_box.remove(lens_index);
         }
     }
 
